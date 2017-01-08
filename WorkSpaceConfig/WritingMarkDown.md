@@ -36,5 +36,8 @@
 	fonts-wqy-zenhei -「文泉驛正黑體」
 	xfonts-wqy - 「文泉驛 X11 字體」
 	ttf-mscorefonts-installer -「微軟英文字型」 
-6. 在$HOME目录中建立~/.Pandoc目录
-   alias pandoc-markdown="pandoc --toc -c ~/.Pandoc/Markdown.css "
+6. 	在$HOME目录中建立~/.Pandoc目录
+    把WorkSpaceConfig/PanDoc中的内容复制到~/.PanDoc里。
+7. 	在.bashrc的末尾加入如下内容,给alias命令建立别名
+	alias pandoc-pdf="pandoc --mathjax --highlight-style monochrome --latex-engine=xelatex --template=/home/erlangz/.PanDoc/default.latex "
+	alias pandoc-html="pandoc --mathjax --highlight-style monochrome --css=/home/erlangz/.PanDoc/default.css "
