@@ -7,5 +7,10 @@
 3. 下载安装 TexLive
    sudo apt-get install texlive-full
    这样latex引擎中包含了xelatex引擎，可以支持中文
-4. 在$HOME目录中建立~/.Pandoc目录
+4. 在vimrc中添加,vim才会将\*.md识别为markdown文档
+   "autocmd BufNewFile,BufRead \*.md,\*.mkdn,\*.markdown :set filetype=markdown"
+5. 安装中文字体
+   sudo apt-get install font-manager
+   https://wiki.ubuntu.com.cn/%E5%85%8D%E8%B4%B9%E4%B8%AD%E6%96%87%E5%AD%97%E4%BD%93
+6. 在$HOME目录中建立~/.Pandoc目录
    alias pandoc-markdown="pandoc --toc -c ~/.Pandoc/Markdown.css "
