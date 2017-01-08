@@ -1,0 +1,8 @@
+set tabstop=4
+set number
+set listchars=tab:>-,trail:-
+"Show the tailing Space
+highlight WhitespaceEOL ctermbg=red guibg=red 
+match WhitespaceEOL /\s\+$/
+"mark the *.md files as Markdown files.
+autocmd BufNewFile,BufRead *.md,*.mkdn,*.markdown :set filetype=markdown

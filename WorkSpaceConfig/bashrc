@@ -1,0 +1,2 @@
+alias pandoc-pdf="pandoc --mathjax --highlight-style monochrome --latex-engine=xelatex --template=/home/erlangz/.PanDoc/default.latex "
+alias pandoc-html="pandoc --mathjax --highlight-style monochrome --css=/home/erlangz/.PanDoc/default.css "
