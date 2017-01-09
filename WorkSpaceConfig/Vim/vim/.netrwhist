@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/www/wwwroot/question/frontend'
+let g:netrw_dirhist_2='/www/wwwroot/question/frontend/views/question'
+let g:netrw_dirhist_3='/home/erlangz/tangruidong/perception'
+let g:netrw_dirhist_4='/home/erlangz/tangruidong/perception/lib'
+let g:netrw_dirhist_5='/home/erlangz/tangruidong/perception/lib/pcl_util'
+let g:netrw_dirhist_6='/home/erlangz/tangruidong/perception/lib/agent'
+let g:netrw_dirhist_7='/home/erlangz/tangruidong/perception/lib/pcd'
+let g:netrw_dirhist_8='/home/erlangz/tangruidong/perception/lib'
+let g:netrw_dirhist_9='/home/erlangz/tangruidong/perception/lib/pcl_util'
