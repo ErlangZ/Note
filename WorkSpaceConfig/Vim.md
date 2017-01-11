@@ -22,7 +22,15 @@ sudo make install
 ```
 
 2. 安装[Vundle](https://github.com/VundleVim/Vundle.vim)插件管理工具  
-用如下的代码替换~/.vimrc   
+- 安装[Clang](http://clang.llvm.org/)
+- 在.vim/bundle/YouCompleteMe目录中运行python install.py --all --enable-coverage --system-libclang
+  完成安装  
+- 在.ycm_extra_conf.py中添加两行  
+```
+'-isystem',                                                                                         
+'/usr/include/c++/4.8',
+```
+- 用如下的代码替换~/.vimrc   
 
 ```
 "Vundle插件配置
@@ -81,10 +89,11 @@ autocmd BufNewFile,BufRead \*.md,\*.mkdn,\*.markdown :set filetype=markdown"
 autocmd filetype javascript set dictionary+=~/.vim/bundle/vim-dict/dict/javascript.dic
 autocmd filetype css set dictionary+=~/.vim/bundle/vim-dict/dict/css.dic
 autocmd filetype php set dictionary+=~/.vim/bundle/vim-dict/dict/php.dic
+
+"配置YouComplete
+let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py'
+let g:ycm_python_binary_path='python'
 ```
-
-
-
 
 
 
