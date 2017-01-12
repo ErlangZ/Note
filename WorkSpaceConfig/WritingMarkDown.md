@@ -59,9 +59,10 @@ function pandoc-html() {
     md_file=$1
     pandoc --mathjax \
            --highlight-style monochrome \
-           --css=http://kevinburke.bitbucket.org/markdowncss/markdown.css 
+           --css=http://kevinburke.bitbucket.org/markdowncss/markdown.css \
            $md_file -o ${md_file%.md}.html
 }
 ```
+
 
 
