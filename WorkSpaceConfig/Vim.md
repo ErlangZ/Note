@@ -22,8 +22,8 @@ sudo make install
 ```
 
 2. 安装[Vundle](https://github.com/VundleVim/Vundle.vim)插件管理工具  
-用如下的代码替换~/.vimrc   
-
+- 将Vundle安装在~/.vim目录下
+- 用如下的代码替换~/.vimrc   
 ```
 "Vundle插件配置
 set nocompatible              " 去除VI一致性,必须
@@ -81,11 +81,12 @@ autocmd BufNewFile,BufRead \*.md,\*.mkdn,\*.markdown :set filetype=markdown"
 autocmd filetype javascript set dictionary+=~/.vim/bundle/vim-dict/dict/javascript.dic
 autocmd filetype css set dictionary+=~/.vim/bundle/vim-dict/dict/css.dic
 autocmd filetype php set dictionary+=~/.vim/bundle/vim-dict/dict/php.dic
+
+" 设置YouComplete配置文件
+let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/examples/.ycm_extra_conf.py' 
 ```
-
-
-
-
+- 在vim中:PluginInstall来安装插件  
+- 在~/.vim/bundle/YouCompleteMe 中运行， ./install.py --clang-completer
 
 
 
