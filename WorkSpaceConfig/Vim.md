@@ -95,7 +95,3 @@ let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/ex
 let g:ycm_python_binary_path='python'
 ```
 
-
-
-
-
