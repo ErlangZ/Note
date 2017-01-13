@@ -96,7 +96,7 @@ $$\begin{aligned}
   \delta^l_{i,j} & =  \sum_{i'} \sum_{j'} \delta_{i',j'}^{l+1} W_{i'-i,j'-j}^{l+1}f'(u_{i,j}^l) \\
   \delta^l_{i,j} & = \delta^{l+1}_{i,j} * W^{l+1}_{-i, -j}f'(u_{i,j}^l) 
    \end{aligned} \eqno{(5)} $$
-这样，卷积层的反向传播过程就推导完毕。
+这样，卷积层的反向传播过程就推导完毕。每一层的误差都是同旋转180度之后的权重进行卷积，并且向后传播的。
 
 
 ## 卷积神经网络的基本运算
@@ -122,5 +122,6 @@ $$\begin{aligned}
 [^5]: `Network_In_Network`-from:Min_Lin
 [^6]: https://grzegorzgwardys.wordpress.com/2016/04/22/8/
 [^7]: https://cn.mathworks.com/help/matlab/ref/conv2.html
+
 
 
