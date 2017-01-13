@@ -47,6 +47,7 @@ $$\delta^{l}=\frac{\partial E}{\partial u^{l}}
 $u^l$的值，这样不论是前向传播还是后向传播时，这个值都可以使用。
 
 
+
 ## 卷积层及其梯度计算方法
 卷积层同样包含$W^l$和$b^l$,$W^l$表示卷积核，$b^l$代表偏置。卷积层的输出是
 $$x^l=f(\sum_i^{K_d} W_i^l*x^{l-1}+b_i^{l})$$ 其中$K_d$表示卷积核的深度(Channel), $*$表示卷积运算, 
@@ -96,7 +97,13 @@ $$\begin{aligned}
   \delta^l_{i,j} & =  \sum_{i'} \sum_{j'} \delta_{i',j'}^{l+1} W_{i'-i,j'-j}^{l+1}f'(u_{i,j}^l) \\
   \delta^l_{i,j} & = \delta^{l+1}_{i,j} * W^{l+1}_{-i, -j}f'(u_{i,j}^l) 
    \end{aligned} \eqno{(5)} $$
-这样，卷积层的反向传播过程就推导完毕。每一层的误差都是同旋转180度之后的权重进行卷积，并且向后传播的。
+这样，每一层的误差都是同旋转180度之后的权重进行卷积，并且向后传播的。定义$ROT180(w_{i,j}^l)=w_{-i,-j}^l$, 
+$$\frac{\partial E}{\partial b_{i,j}^l} = \delta^l_{i,j}=\delta^{l+1}*ROT180(W_{i,j}^{l+1})f'(u_l)  \eqno{(6)} $$
+使用类似的思路，我们可以计算出
+$$\begin{aligned}
+\frac{\partial E}{\partial W_{i,j}^l} & = \sum_{i'} \sum_{j'} \frac{\partial E}{\partial u_{i',j'}^l} \frac{\partial u_{i',j'}^l}{\partial W_{i,j}^l}  \\
+                                      & = \delta^l_{i,j} * f(ROT180(u_{i,j}^{l-1})) 
+\end{aligned} \eqno{(7)} $$
 
 
 ## 卷积神经网络的基本运算
@@ -122,6 +129,7 @@ $$\begin{aligned}
 [^5]: `Network_In_Network`-from:Min_Lin
 [^6]: https://grzegorzgwardys.wordpress.com/2016/04/22/8/
 [^7]: https://cn.mathworks.com/help/matlab/ref/conv2.html
+
 
 
 
