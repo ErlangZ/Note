@@ -69,7 +69,7 @@ $f$是卷积层中使用的非线性函数。 $W^l$的大小设为$K_h \times K_
 
 ![卷积层误差反向传播过程](Conv-BP-1.png)
 
-具体的计算的卷积过程，可以参见Figure-4。这是一种full卷积方式，卷积核在图片外的部分，都不会算在卷
+具体的计算的卷积过程，可以参见Figure-4。这是一种full卷积方式，卷积核在图片外的部分，也会算在卷
 积的结果中。可以看出，经过这种卷积过程之后，结果会变大。这和前向传播时的计算方式不同，前向传播时，
 采用了valid卷积方式，卷积核不会超过图像区域的范围，卷积出来的内容只会变小。关于卷积，实际上还有一
 种same卷积[^7]
@@ -106,6 +106,7 @@ $$\begin{aligned}
 \end{aligned} \eqno{(7)} $$
 
 
+
 ## 卷积神经网络的基本运算
 - Relu
 - Pooling 
@@ -129,6 +130,7 @@ $$\begin{aligned}
 [^5]: `Network_In_Network`-from:Min_Lin
 [^6]: https://grzegorzgwardys.wordpress.com/2016/04/22/8/
 [^7]: https://cn.mathworks.com/help/matlab/ref/conv2.html
+
 
 
 
