@@ -107,21 +107,40 @@ $$\begin{aligned}
 
 
 
-## 卷积神经网络的基本运算
-- Relu
-- Pooling 
+
+##卷积神经网络的基本运算
+###Relu
+   Relu(Rectified Linear Units)激活函数是一种非线性函数运算$f(x)=max (x, 0)$,这种运算在卷积神经网络
+   中基本替代了之前的Sigmoid函数。解决了_梯度消失和梯度爆炸问题_,在caffe中，它允许用户使用它的leaky
+   变形，$$f(x)=\begin{cases}x, x>0 \\ \alpha x, otherwise \end{cases}$$ 
+
+   Caffe中反向传递时，Relu也很简单，只是向后传递了那些前向传输时，输入层数据大于0单元的梯度；小于0的
+   单元梯度都是0。
+
+### Pooling
    Pooling运算是一种Sup-Sampling。简单的说，就是把$M \times N$的图像区域按照$K \times K$的大小进行
    划分，然后每个区域进行AVE或者MAX运算，得到$M/K \times N/K$大小的特征图像。比如原图像大小为
    $16 \times 16$, 我们希望进行2:1的采样，那么采用2*2的Pooling-Region大小，会得到$8 \times 8$的结果
    图像。Pooling操作一般紧跟卷积层之后，它带来了某种"不变性"，就是图像中只要在某片区域中出现了某个
    信息就判定结果为真，而不要求图像每个像素点都同预期完全一致，现在主要使用的Pooling类型为Max-Pooling。
-   
-   而Pooling层也有自己的权重$\beta$和偏置$b$, 形式化表示
-   $$x_j^l=f(\beta_{j}^{l} down(x_j^{l-1}) + b_j^l)$$ $j$表示卷积通道, $down(.)$表示上文提到的采样过程。
     
-   问题是在反向传播的时候，Pooling的行为是怎么样的?[^3]
-- Normalization
-- Dropout
+   问题是在反向传播的时候，Pooling的行为是怎么样的?[^3]在Caffe中，我们很容易看到Max-Pooling层向前传
+   递结果时，会把产生的最大值坐标记录到mask中；在反向传递误差的时候，根据这个mask值去将之前传递的最
+   大值的误差向后传递。如果是AVE-Pooling，误差实际上是top层区域内误差的平均值。
+
+### Normalization
+   在Caffe中，归一化的操作是由LRN层(Local Response Normalization)局部响应归一化层来实现的。
+   $$b^i_{x,y} = a^i_{x,y}/(k+\alpha \sum_{j=max(0, i-n/2)}^{min(i+n/2,N-1)}(a^i_{x,y})^2)^{\beta}$$
+   $a^i_{x,y}$代表了卷积核i在(x,y)位置处进行运算，然后使用Relu之后的输出。$b^i_{x,y}$是归一化之后的响
+   应，归一化区域的大小$n$同卷积核的大小一致, N是这一层总的卷积核数。这种机制是受到生物体神经元的启发，
+   对局部神经元的活动创建竞争机制[^8]， 一般$k = 2$, $\alpha= 10^{-4}$, $\beta = 0.75$,在Caffe
+   中采用了$\alpha /n$来代替$\alpha$。
+
+### Dropout
+   Dropout是一种计算很简单的防止模型过拟合的方式[^9]。关键思路就是在训练时，随机丢弃掉一些单元的输出
+   (和包括它们的连接)，但是在测试时，这些单元和连接则会一直存在。最简单的情况下，在训练时，每个单元
+   都会以比如0.5的概率不会输出，每轮的训练都会记录下来这些失效单元的位置。在反向传递误差的时候，只有
+   有效的单元数据才会被输出。
 
 [^1]: https://www.deeplearningbook.org/contents/convnets.html
 [^2]: https://erlangz.wordpress.com/Convolution.html
@@ -130,6 +149,8 @@ $$\begin{aligned}
 [^5]: `Network_In_Network`-from:Min_Lin
 [^6]: https://grzegorzgwardys.wordpress.com/2016/04/22/8/
 [^7]: https://cn.mathworks.com/help/matlab/ref/conv2.html
+[^8]: http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf
+[^9]: [Dropout:_A_Simple_Way_to_Prevent_Neural_Networks_from_Overfitting](https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf)
 
 
 
