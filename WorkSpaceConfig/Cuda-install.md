@@ -27,3 +27,9 @@ Cuda-Toolkit: Skip
  ===============  
  Driver: Installed  
  Cuda-Toolkit: Installed  
+
+
+4. 说明  
+- 如果显卡架构是Pascal或者更新的架构，就是sm_60或者sm_61，比如GeForce 1070，则必须使用Cuda 8
+- 如果Nvidia的显卡驱动已经安装过，比如输入nvidia-smi会有正确的输出。那么安装Cuda时可以不安装驱动，
+　而且比较新的显卡，Cuda里自带的驱动很可能版本不对，根本安装不上，在安装Cuda时直接跳过就好。
