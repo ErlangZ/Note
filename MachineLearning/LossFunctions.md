@@ -49,7 +49,3 @@ $$\frac{\partial{J}}{\partial\mathbf\theta}
 $$
 在实际的计算中，可能还包含了一个系数l，这就是为什么Caffe在最后进行了一次Scale。
 
-
-
-
-
