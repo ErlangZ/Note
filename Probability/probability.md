@@ -1,4 +1,5 @@
 #概率论
+## 概率函数
 1. 概率经典定义  
 如果一项随机实验可以产生$n$种互斥并且等可能的输出，其中$n_A$项输出具有属性A，那么A的概率就是$n_A/n$。
 2. 概率模型  
@@ -33,20 +34,54 @@ $$
 概率空间是一个三元组($\Omega, \mathcal A, P[\bullet]$), $\Omega$是样本空间， $\mathbf A$是事件空间，
 $P[\bullet]$是$\mathbf A$的概率函数。可以看到，这三个元素之间是相互关联的，$\mathbf A$是$\Omega$子集
 的集合，$P[\bullet]$是以$\mathbf A$为定义域的函数。
+8. 等可能概率函数  
+$\omega_i$是有限空间$\Omega$内的某个样本点，如果概率函数同时满足两个条件,就是等可能的概率函数
+    * $P[\{\omega_{1}\}] = P[\{\omega_{2}\}] = ... = P[\{\omega_{N}\}]$
+    * 如果$A$是$\Omega$空间内有$N(A)$个样本点的子集，那么$P[A]=N(A)/N$
+9. 条件概率  
+假设A和B是给定样本空间$\mathcal A$中的两个事件。
+$$ P[A|B] = \frac{P[AB]}{P[B]} $$
+当然，这要求$P[B]>0$。如果$P[B]=0$，这种情况没有定义。
 
+## 随机变量
+1. 随机变量  
+一个给定的概率空间($\Omega,\mathcal A, P[\bullet]$),定义随机变量$X$或者写做$X[\bullet]$为一个函数，
+它的定义域是$\Omega$,值域是整个实数轴。$X(\bullet)$必须满足，对任何的$A \in \mathcal A$都有实数$r$，
+满足$A_r=\{\omega: X(\omega)\leq r\}$。我们定义了满足$X(\omega)\leq r$的所有$\omega$集合是一个事件，
+也就是$\mathcal A$的一个元素，这样我们就将实验结果同实数集联系起来 。 
+依然考虑投掷硬币的例子，$\Omega=\{Head, Tail\}$。当$\omega=Head$时，$X(\omega)=1$; 当$\omega=Tail$时，
+$X(\omega)=0$。
+2. 累计分布函数  
+随机变量X的累计概率分布函数，用$F_X(\bullet)$来表示。它是一个函数，定义域是实数轴，值域在$[0,1]$之间
+的函数，满足对任意实数x, $F_X(x)=P[X \leq x]=P[{\omega: X(\omega) \leq x}]$  
+每个累计概率分布函数都唯一定义随机变量。如果已知累计概率分布，我们就可以预测事件发生的概率。
+举个抛硬币的例子，假设$X$是正面朝上的次数
+$$F_X(x) = \begin{cases} 0 \quad x < 0 \\
+                         \frac{1}{2} \quad 1 > x \geq 0\\
+                         1 \quad 1 \leq x
+           \end{cases}$$
+3. 离散随机变量    
+如果X的输出范围是可数的，那么X是离散随机变量。离散随机变量的累计分布函数也是离散的。
+4. 离散随机变量的离散密度函数  
+如果X是有$x_1, x_2, ..., x_n, ...$离散随机变量，那么$f_X(\bullet)$就是离散密度函数。
+$$f_X(x)=\begin{cases} 
+P[X=x_j] \quad x=x_j \\
+0 \quad x \neq x_j
+\end{cases}$$
+随机变量的值也经常被叫做`质点`，$f_X(x_j)$代表了同质点$x_j$关联的`质量`。很明显，
+$f_X(\bullet)$和$F_X(\bullet)$之间是微分和积分的关系，它们可以相互推导。
+5. 连续随机变量及其概率密度函数  
+$$F_X(x)=\int_{-\infty}^xf_X(u)du$$
+$$\int_{-\infty}^{+\infty}f_X(u)du=1$$
 
-
-
-
-
-
-
-
-
-
-
-
-
+## 期望和方差
+1. 期望  
+$$ \xi[X] = \int^{+\infty}_{\infty}xf_X(x)dx$$
+$$ \xi[X] = \int^{+\infty}_0[1-F_X(x)]dx - \int^0_{-\infty}F_X(x)dx $$
+2. 方差  
+假设$X$是一个随机变量,$\mu_X$就是$\xi[X]$, 那么$X$的方差，$\sigma^2$或者写成var[X]
+$$ var[x] = \int_{-\infty}^{+\infty}(x-\mu_X)^2f_X(x)dx$$
+$$ var[x] = \int_0^{+\infty}2x[1-F_X(x)+F_X(-x)]dx - \mu_X^2$$
 
 
 
