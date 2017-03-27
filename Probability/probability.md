@@ -1,5 +1,5 @@
-#概率论
-## 概率函数
+#概率论[^1]
+## 概率空间
 1. 概率经典定义  
 概率的经典定义，也被称为`先验概率`。如果一项随机实验可以产生$n$种互斥并且等可能的输出，其中$n_A$项
 输出具有属性A，那么A的概率就是$n_A/n$。
@@ -50,17 +50,25 @@ $\omega_i$是有限空间$\Omega$内的某个样本点，如果概率函数同�
 假设A和B是给定样本空间$\mathcal A$中的两个事件。
 $$ P[A|B] = \frac{P[AB]}{P[B]} $$
 当然，这要求$P[B]>0$。如果$P[B]=0$，这种情况没有定义。  
-如果$A$和$B$相互独立，那么
-$$ P[A|B] = P[A] $$
 11. 全概率公式(Total Probabily Theorem)  
 对一个给定的概率空间$(\Omega,\mathcal{A},P[\bullet])$， 如果$B_1,B_2,...,B_n$是$\mathcal{A}$中一系列
 互斥事件，并且，$\Omega=\cup_{i=1}^nB_i$，对$j=1,2,...n$都有$P[B_i] > 0$，那么对于任何一个$A \in \mathcal{A}$
 中的事件，$$P[A]=\sum^n_{i=1}P[A|B_i]P[B_i]$$
-12. 贝叶斯公式(Bayes' formula)
+12. 贝叶斯公式(Bayes' formula)  
 对一个给定的概率空间$(\Omega,\mathcal{A},P[\bullet])$,如果$B_1,B_2,...,B_n$是$\mathcal{A}$中一系列
 互斥事件，并且，$\Omega=\cup_{i=1}^nB_i$，对$j=1,2,...n$都有$P[B_i] > 0$，那么对于任何一个$A \in \mathcal{A}$，
 都有
 $$P[B_{k}|A] = \frac{P[A|B_{k}]P[B_{k}]}{\sum_{i=1}^{n}P[A|B_{i}]P[B_{i}]} $$
+13. 乘法法则  
+对一个给定的概率空间$(\Omega,\mathcal{A},P[\bullet])$,假设$A_1,A_2,...,A_n$是$\mathcal{A}$的事件，
+$P[A_{1}...A_{n}] > 0$，
+$$P[A_1A_2...An]=P[A_1]P[A_2|A1]P[A_3|A_1A_2]...P[A_n|A_1...A_{n-1}]$$
+14. 独立事件  
+如果$A$和$B$相互独立，那么
+$$ P[AB] = P[A]P[B] $$
+$$ P[A|B] = P[A] \quad if \ P[B]>0$$
+$$ P[B|A] = P[B] \quad if \ P[A]>0$$
+
 
 
 
@@ -71,14 +79,20 @@ $$P[B_{k}|A] = \frac{P[A|B_{k}]P[B_{k}]}{\sum_{i=1}^{n}P[A|B_{i}]P[B_{i}]} $$
 1. 随机变量  
 一个给定的概率空间($\Omega,\mathcal A, P[\bullet]$),定义随机变量$X$或者写做$X[\bullet]$为一个函数，
 它的定义域是$\Omega$,值域是整个实数轴。$X(\bullet)$必须满足，对任何的$A \in \mathcal A$都有实数$r$，
-满足$A_r=\{\omega: X(\omega)\leq r\}$。我们定义了满足$X(\omega)\leq r$的所有$\omega$集合是一个事件，
-也就是$\mathcal A$的一个元素，这样我们就将实验结果同实数集联系起来 。 
-依然考虑投掷硬币的例子，$\Omega=\{Head, Tail\}$。当$\omega=Head$时，$X(\omega)=1$; 当$\omega=Tail$时，
-$X(\omega)=0$。
+满足$A_r=\{\omega: X(\omega)\leq r\}$。  
+我们定义了满足$X(\omega)\leq r$的所有$\omega$集合是一个事件，也就是$\mathcal A$的一个元素，这样我们
+就将实验结果同实数集联系起来。可以说，随机变量的定义域是`原始事件`。依然考虑投掷硬币的例子，
+$\Omega=\{Head, Tail\}$。当$\omega=Head$时，$X(\omega)=1$; 当$\omega=Tail$时，$X(\omega)=0$。这样，
+$r\leq 1$表示全集，$r=-1$表示空集。  
+$\Omega$是我们随机实验的完整输出，而随机变量$X$将输出同实数轴联系起来。我们可以用${\omega|X(\omega) \leq r}$
+来定义事件，所有在这个集合中的$\omega$都表示一个事件要发生。  
+考虑同时投掷两个色子的实验，$\Omega=(i,j)\ i=\{1,2..,6\} \ j=\{1,2..,6\}$。$X$定义为两个朝上面之和的
+随机变量，$X(\omega)=i+j \ \omega=(i,j)$; $Y$定义为两个朝上面的绝对值之差，$Y(\omega)=|i-j| \ \omega=(i,j)$。   
 2. 累计分布函数  
-随机变量X的累计概率分布函数，用$F_X(\bullet)$来表示。它是一个函数，定义域是实数轴，值域在$[0,1]$之间
-的函数，满足对任意实数x, $F_X(x)=P[X \leq x]=P[{\omega: X(\omega) \leq x}]$  
-每个累计概率分布函数都唯一定义随机变量。如果已知累计概率分布，我们就可以预测事件发生的概率。
+累计概率分布，将随机变量同$P[\bullet]$联系起来，每个累计分布函数都唯一定义一个随机变量。随机变量X的
+累计概率分布函数，用$F_X(\bullet)$来表示。它是一个函数，定义域是实数轴，值域在$[0,1]$之间的函数，满
+足对任意实数x, $F_X(x)=P[X \leq x]=P[{\omega: X(\omega) \leq x}]$ 每个累计概率分布函数都唯一定义随机变量。
+如果已知累计概率分布，我们就可以预测事件发生的概率。  
 举个抛硬币的例子，假设$X$是正面朝上的次数
 $$F_X(x) = \begin{cases} 0 \quad x < 0 \\
                          \frac{1}{2} \quad 1 > x \geq 0\\
@@ -100,20 +114,47 @@ $$\int_{-\infty}^{+\infty}f_X(u)du=1$$
 
 
 
-
-## 期望和方差
+## 期望,方差和矩
 1. 期望  
+期望，实际上是概率密度的加权平均。
 $$ \xi[X] = \int^{+\infty}_{\infty}xf_X(x)dx$$
 $$ \xi[X] = \int^{+\infty}_0[1-F_X(x)]dx - \int^0_{-\infty}F_X(x)dx $$
-2. 方差  
+期望在定义的时候，可以只使用概率分布函数和概率密度函数，所以，我们可以说`某个随机变量的期望`；也可以
+说是`某个概率分布的期望`。期望代表了单元质量的"重心"，所以，它会反映随机变量值`中心`的位置。但是，请
+注意期望值可以不出现在随机变量结果集中, 也有可能完全不存在，比如是$\infty$。
+2. 方差和标准差  
 假设$X$是一个随机变量,$\mu_X$就是$\xi[X]$, 那么$X$的方差，$\sigma^2$或者写成var[X]
 $$ var[x] = \int_{-\infty}^{+\infty}(x-\mu_X)^2f_X(x)dx$$
 $$ var[x] = \int_0^{+\infty}2x[1-F_X(x)+F_X(-x)]dx - \mu_X^2$$
-
-3. 切比雪夫不等式  
+标准差定义为$\sqrt{var[X]}$
+3. 随机变量函数的期望值  
+假设$X$是一个随机变量，$g(\bullet)$是一个定义域和值域都是实数域的函数。那么
+$$\xi[g(X)] = \sum_jg(x_j)f_X(x_j)$$
+$$\xi[g(X)] = \int_{-\infty}^{+\infty}g(x)f_X(x)dx$$
+如果$g(x)=x$，那么,$\xi[g(X)]=\xi[X]$。如果$g(x)=(x-\mu_x)^2$,那么$\xi[g(X)]=var[X]$
+如果c是一个常数函数，
+$$\xi[c]=c$$
+如果c是一个常数，
+$$\xi[cg(X)] = c\xi[g(X)]$$
+$$\xi[c_1g_1(X)+c_2g_2(X)] = c_1\xi[g_1(X)] + c_2\xi[g_2(X)]$$
+$$if \ g_1(x) \leq g_2(x),\ \ \ \xi[g_1(x)] \leq \xi[g_2(x)]$$
+如果X是一个随机变量，
+$$var[X]=\xi[(X-\xi[X])^2]=\xi[X^2]-(\xi[X])^2$$
+这个等式的证明就利用上式展开就可以了。
+4. 切比雪夫不等式和JenSen不等式(略)  
 假设X是一个随机变量，$g(\bullet)$是以实数轴为定义域的非负函数，对一切$k > 0$都有
 $$ P[g(X) \geq k] \leq \frac{\xi[g(X)]}{k}$$
+5. 矩(Moments)  
+如果X是随机变量，X的第r矩，使用$\mu_r'$表示
+$$\mu_r'=\xi[X^r]$$
+$r=1$时，$\mu_1'$就是$\xi[X]$
+6. 中心矩(Central Moments)
+如果X是一个随机变量，X的关于a的r阶中心矩定义为$\xi[(X-a)^r]$。如果$a=\mu_{X}$,那么，X关于$\mu_X$的r阶中心
+矩是
+$$\mu_r=\xi[(X-\mu_X)^r]$$
+可以看出来，期望和方差都是`矩`的某个特例。
 
+[^1]: Introduction to the theory of statistics. Mood, Alexander
 
 
 
