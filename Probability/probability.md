@@ -207,35 +207,16 @@ $$\begin{aligned} \xi[X] &= \sum_{i=0}^n iC_n^ip^i(1-p)^{n-i} \\
                          &= np(p+1-p)^{n-1}=np
 \end{aligned}$$
 方差$var[X]=np(1-p)$
+我们已知$i^2C_n^i = in*C_{n-1}^{i-1} = (i-1+1)n*C_{n-1}^{i-1} = nC_{n-1}^{i-1}+n(n-1)C_{n-2}^{i-2}$
+$$\begin{aligned} var[X] &= \xi[X^2] - (\xi[X])^2 \\
+                         &= \sum_{i=0}^n i^2C_n^ip^iq^{n-i} - (np)^2 \\
+                         &= npq^{n-1} + \sum_{i=2}^n nC_{n-1}^{i-1} + \sum_{i=2}^n n(n-1)C_{n-2}^{i-2}p^iq^{n-i} - (np)^2 \\
+                         &= npq^{n-1} - (np)^2 + \sum_{i'=0}^{n-2} nC_{n-1}^{i'}
+\end{aligned}$$
 
 [^1]: Introduction to the theory of statistics. Mood, Alexander
 [^2]: 知乎 (概率论中的`矩`有什么含义)question/23236070
 [^3]: 维基百科 矩
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
