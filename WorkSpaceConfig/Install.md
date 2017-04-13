@@ -15,11 +15,13 @@ sudo apt-get install g++
 ```
 sudo apt-get install libstdc++-4.8-doc manpages-dev glibc-doc
 sudo pip3 install cppman  #cppman dependent on python3
+cppman -c
 ```
 2. 终端分屏控制器（配置文件也在本目录中）
 ```
 sudo apt-get install terminator
 ```
+
 
 
 
