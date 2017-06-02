@@ -83,6 +83,34 @@ glOrtho(left, right, bottom, top, near, far);
   长的管道来观察3维世界，只有在管子中的near-far之间的物体才能被观察到。而管子的长度/宽度和位置就是通
   过前4个参数来指定的，在管子中的物体是没有深度信息的。不论如何调整远近距离，所有的点的图像都不变。
 
+
+## OpenGl的光线[^3]
+  使用`glEnable(GL_LIGHTING)`/`glDisable(GL_LIGHTING)`可以打开和关闭OpenGL的光线，如果被关闭的话，那
+  么所有多边形的颜色最后都是只由`glCorlor`来指定，如果调用`glColor3f ( 1.0f, 0.0f, 0.0f );`，那不论
+  这个物体放到相对光源有多远，物体都是纯红色。但是，如果你把开关打开的话，需要指定一些额外的参数。
+  首先，我们要知道物体的光泽度，其次，物体在黑暗中是否发光，物体是会均匀的散射光线还是会向某个方向
+  进行反射。
+  * AMBIENT - light that comes from all directions equally and is scattered in all directions equal-
+    ly by the polygons in your scene. This isn't quite true of the real world - but it's a good
+    first approximation for light that comes pretty much uniformly from the sky and arrives onto a
+    surface by bouncing off so many other surfaces that it might as well be uniform.
+  * DIFFUSE - light that comes from a particular point source (like the Sun) and hits surfaces with
+    an intensity that depends on whether they face towards the light or away from it. However, once
+    the light radiates from the surface, it does so equally in all directions. It is diffuse lighting
+    that best defines the shape of 3D objects.
+  * SPECULAR - as with diffuse lighting, the light comes from a point souce, but with specular
+    lighting, it is reflected more in the manner of a mirror where most of the light bounces off in
+    a particular direction defined by the surface shape. Specular lighting is what produces the
+    shiney highlights and helps us to distinguish between flat, dull surfaces such as plaster and
+    shiney surfaces like polished plastics and metals.
+  * EMISSION - in this case, the light is actually emitted by the polygon - equally in all directions.
+
+  所以，实际上我们有三种不同的光，使用`glLight`来设置AMBIENT, DIFFUSE 和 SPECULAR，使用`glMaterial`
+  来设置EMISSION。
+
+
+
+
 [^1]: http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/
 [^2]: http://www.cs.umd.edu/class/sum2003/cmsc427/pSpecify.pdf
-
+[^3]: https://www.sjbaker.org/steve/omniv/opengl_lighting.html
