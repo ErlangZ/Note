@@ -79,7 +79,9 @@ glLoadIdentity();
 glOrtho(left, right, bottom, top, near, far);
 ```
   如上的三行代码让OpenGl使用平行视角进行显示。平行视角的景视体实际上是一个长方体。就是用垂直于视平面线
-  进行投影看，前4个参数说明3D空间是如何被投影的, 后两个参数说明景深。
+  进行投影看，前4个参数说明3D空间是如何被投影的, 后两个参数说明景深。可以把平行视角想象成透过一根长
+  长的管道来观察3维世界，只有在管子中的near-far之间的物体才能被观察到。而管子的长度/宽度和位置就是通
+  过前4个参数来指定的，在管子中的物体是没有深度信息的。不论如何调整远近距离，所有的点的图像都不变。
 
 [^1]: http://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/
 [^2]: http://www.cs.umd.edu/class/sum2003/cmsc427/pSpecify.pdf
